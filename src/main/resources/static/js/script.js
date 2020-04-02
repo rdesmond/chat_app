@@ -1,4 +1,4 @@
-let userID = 3;
+let userID = document.getElementById('user_id').value;
 //const base_ip_endpoint = 'http://demo.codingnomads.co:8080/muttsapp/users/';
 const base_ip_endpoint = 'http://localhost:8080/users/'
 
@@ -89,7 +89,9 @@ const createChatBubble = (msg) => {
     let chatBubble = document.createElement('div');
     // console.log(msg)
     let sentClassName;
-    if( msg.sender_id === userID ){
+//    console.log(userID)
+//    console.log(msg.sender_id)
+    if( msg.sender_id === parseInt(userID) ){
         sentClassName = "out";
     } else {
         sentClassName = "in"

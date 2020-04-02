@@ -54,6 +54,7 @@ public class UserMessageService {
         ArrayList<ChatDBResponse> chats = chatMapper.getListByUserId(id);
         for(ChatDBResponse c : chats){
             c.setPhoto_url(userMapper.getPhotoByUserId(c.getSender_id()));
+            c.setLast_message(chatMapper.getLastMessage(c.getChat_id()));
         }
         return  chats;
     }

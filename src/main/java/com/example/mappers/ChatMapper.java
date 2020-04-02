@@ -21,7 +21,7 @@ public interface ChatMapper {
             "where m.chat_id = #{chat_id} " +
             "order by m.date_sent asc;";
 
-    String GET_CHAT_LIST = "select distinct(c.chat_title) as chat_name, c.id as chat_id, max(m.message) as last_message, " +
+    String GET_CHAT_LIST = "select distinct(c.chat_title) as chat_name, c.id as chat_id, " +
             "m.user_id as sender_id, m.date_sent " +
             "from chats c " +
             "join messages m " +
@@ -55,6 +55,11 @@ public interface ChatMapper {
     String ASSOCIATE_NEW_CHAT = "insert into users_chats (user_id, chat_id) values " +
             "(#{param1}, #{param2})";
 
+    String GET_LAST_MSG = "SELECT message FROM messages " +
+            "where chat_id = #{chat_id} " +
+            "order by date_sent desc " +
+            "limit 1";
+
     @Select(GET_MESSAGES_BY_CHAT_ID)
     public ArrayList<Message> getMessagesByChatId(int chat_id);
 
@@ -77,4 +82,7 @@ public interface ChatMapper {
 
     @Insert(ASSOCIATE_NEW_CHAT)
     int associateChat(int user_id, int chat_id);
+
+    @Select(GET_LAST_MSG)
+    String getLastMessage(int chat_id);
 }

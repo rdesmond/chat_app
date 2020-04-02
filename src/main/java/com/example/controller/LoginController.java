@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.auth.User;
 import com.example.service.UserLoginService;
+
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -58,22 +61,11 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/admin/index", method = RequestMethod.GET)
-	public ModelAndView index(){
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userLoginService.findUserByEmail(auth.getName());
-//		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-//		modelAndView.addObject("adminMessage","This is another page");
-		modelAndView.setViewName("admin/index");
-		return modelAndView;
+	public String index(Authentication principal, Model model){
+		//model.addAttribute("user_id", name);
+		int user_id = userLoginService.findUserByEmail(principal.getName()).getId();
+		model.addAttribute("user_id", user_id);
+		return "admin/index";
 
 	}
-
-
-
-
-
-
-
-
 }
