@@ -1,9 +1,10 @@
 let userID = document.getElementById('user_id').value;
-//const base_ip_endpoint = 'http://demo.codingnomads.co:8080/muttsapp/users/';
-const base_ip_endpoint = 'http://localhost:8080/users/'
+const base_ip_endpoint = 'http://demo.codingnomads.co:8080/muttsapp/users/';
+//const base_ip_endpoint = 'http://localhost:8080/users/'
 
 //As soon as JS file loads, we run this function to get all the items for the sidebar
 function getUserChats() {
+
     fetch(base_ip_endpoint + userID + "/chats")
         //The info retrieved in the fetch request returns a response object.
         //The response object is assigned to the parameter in the following method as "response"
@@ -94,6 +95,7 @@ const createChatBubble = (msg) => {
     if( msg.sender_id === parseInt(userID) ){
         sentClassName = "out";
     } else {
+
         sentClassName = "in"
     }
     chatBubble.classList.add("chat-bubble", sentClassName);

@@ -1,9 +1,12 @@
 package com.example.model.internal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 public class Message {
 
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     int id;
     String message;
     Date date_sent;

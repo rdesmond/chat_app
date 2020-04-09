@@ -63,9 +63,8 @@ public class LoginController {
 	@RequestMapping(value="/admin/index", method = RequestMethod.GET)
 	public String index(Authentication principal, Model model){
 		//model.addAttribute("user_id", name);
-		int user_id = userLoginService.findUserByEmail(principal.getName()).getId();
+		int user_id = userLoginService.findUserByEmail(principal.getName()).getUser_id();
 		model.addAttribute("user_id", user_id);
 		return "admin/index";
-
 	}
 }

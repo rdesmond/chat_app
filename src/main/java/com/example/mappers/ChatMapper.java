@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @Mapper
 public interface ChatMapper {
 
-    String GET_MESSAGES_BY_CHAT_ID = "select m.message, m.date_sent, m.chat_id, m.user_id as sender_id, c.chat_title " +
+    String GET_MESSAGES_BY_CHAT_ID = "select m.id, m.message, m.date_sent, m.chat_id, m.user_id as sender_id, c.chat_title " +
             "from messages m " +
             "join chats c " +
             "on m.chat_id = c.id " +
@@ -22,7 +22,7 @@ public interface ChatMapper {
             "order by m.date_sent asc;";
 
     String GET_CHAT_LIST = "select distinct(c.chat_title) as chat_name, c.id as chat_id, " +
-            "m.user_id as sender_id, m.date_sent " +
+            "m.user_id as sender_id " +
             "from chats c " +
             "join messages m " +
             "on m.chat_id = c.id " +

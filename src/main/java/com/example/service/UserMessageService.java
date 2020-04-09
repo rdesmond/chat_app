@@ -53,7 +53,11 @@ public class UserMessageService {
     public ArrayList<ChatDBResponse> getChatListByUserId(int id) {
         ArrayList<ChatDBResponse> chats = chatMapper.getListByUserId(id);
         for(ChatDBResponse c : chats){
-            c.setPhoto_url(userMapper.getPhotoByUserId(c.getSender_id()));
+            try {
+                c.setPhoto_url(userMapper.getPhotoByUserId(c.getSender_id()));
+            } catch(Exception e){
+                System.out.println("photo not found");
+            }
             c.setLast_message(chatMapper.getLastMessage(c.getChat_id()));
         }
         return  chats;
