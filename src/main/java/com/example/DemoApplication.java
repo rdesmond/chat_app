@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
 @SpringBootApplication
-public class DemoApplication extends SpringBootServletInitializer {
+public class DemoApplication { //extends SpringBootServletInitializer {
 
-	@Override
-    protected SpringApplicationBuilder configure(
-            SpringApplicationBuilder builder) {
-        return builder.sources(DemoApplication.class);
-    }
+//	@Override
+//    protected SpringApplicationBuilder configure(
+//            SpringApplicationBuilder builder) {
+//        return builder.sources(DemoApplication.class);
+//    }
 
 	@Bean
 	public EmbeddedServletContainerCustomizer containerCustomizer() {

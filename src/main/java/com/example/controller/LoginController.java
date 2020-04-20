@@ -1,10 +1,8 @@
 package com.example.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.auth.User;
 import com.example.service.UserLoginService;
 
-import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -61,10 +58,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/admin/index", method = RequestMethod.GET)
-	public String index(Authentication principal, Model model){
+	public String index(Authentication auth, Model cuttlefish){
 		//model.addAttribute("user_id", name);
-		int user_id = userLoginService.findUserByEmail(principal.getName()).getUser_id();
-		model.addAttribute("user_id", user_id);
+		int user_id = userLoginService.findUserByEmail(auth.getName()).getUser_id();
+		cuttlefish.addAttribute("user_id", user_id);
 		return "admin/index";
 	}
 }

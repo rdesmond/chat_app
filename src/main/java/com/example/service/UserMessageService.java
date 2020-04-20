@@ -51,7 +51,9 @@ public class UserMessageService {
     }
 
     public ArrayList<ChatDBResponse> getChatListByUserId(int id) {
+
         ArrayList<ChatDBResponse> chats = chatMapper.getListByUserId(id);
+
         for(ChatDBResponse c : chats){
             try {
                 c.setPhoto_url(userMapper.getPhotoByUserId(c.getSender_id()));
@@ -60,6 +62,7 @@ public class UserMessageService {
             }
             c.setLast_message(chatMapper.getLastMessage(c.getChat_id()));
         }
+
         return  chats;
     }
 

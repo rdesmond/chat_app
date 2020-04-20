@@ -1,6 +1,6 @@
 let userID = document.getElementById('user_id').value;
-const base_ip_endpoint = 'http://demo.codingnomads.co:8080/muttsapp/users/';
-//const base_ip_endpoint = 'http://localhost:8080/users/'
+//const base_ip_endpoint = 'http://demo.codingnomads.co:8080/muttsapp/users/';
+const base_ip_endpoint = 'http://localhost:8080/users/'
 
 //As soon as JS file loads, we run this function to get all the items for the sidebar
 function getUserChats() {
@@ -144,6 +144,7 @@ const createChatBubble = (msg) => {
     p1.setAttribute('data-chat_id', chat.chat_id);
     p1.setAttribute('data-sender_id', chat.sender_id)
     p1.innerHTML = chat.chat_name;
+
     let p2 = document.createElement('p');
     p2.setAttribute('data-chat_id', chat.chat_id);
     p2.setAttribute('data-sender_id', chat.sender_id)
