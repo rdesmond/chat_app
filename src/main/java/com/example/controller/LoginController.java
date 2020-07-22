@@ -1,11 +1,14 @@
 package com.example.controller;
 
 import javax.validation.Valid;
+
+import com.example.exceptions.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +28,11 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
+	}
+
+	@RequestMapping(value={"/test"}, method = RequestMethod.GET)
+	public ModelAndView test() throws CustomException {
+		throw new CustomException(" ** Cuttlefish ** ");
 	}
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)

@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.exceptions.AnotherCustomException;
 import com.example.model.auth.User;
 import com.example.model.internal.Chat;
 import com.example.model.internal.ChatPost;
@@ -20,9 +21,13 @@ public class UserController {
     UserMessageService userService;
 
 
-    //RequestMapping maps URLs to methods
+    @RequestMapping("/test_api")
+    public ResponseObject<ArrayList<User>> test() throws Exception {
+        return userService.testException();
+    }
 
-    //Get
+
+    //Get All Users
     @RequestMapping("/")
     public ResponseObject<ArrayList<User>> getUsers() {
         ResponseObject<ArrayList<User>> obj = new ResponseObject();
@@ -30,6 +35,7 @@ public class UserController {
         return obj;
     }
 
+    //Get User By Id
     @RequestMapping("/{id}")
     public ResponseObject<User> getById(@PathVariable(value="id")int id) {
         ResponseObject<User> obj = new ResponseObject();
@@ -37,7 +43,7 @@ public class UserController {
         return obj;
     }
 
-    //Create
+    //Create User
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public ResponseObject<User> addNew(@RequestBody User user) {
@@ -46,7 +52,7 @@ public class UserController {
         return obj;
     }
 
-    //Update
+    //Update User
     @RequestMapping(method = RequestMethod.PATCH, value = "/")
     public  ResponseObject<User> updateById(@RequestBody User user) {
         ResponseObject<User> obj = new ResponseObject();
@@ -54,7 +60,7 @@ public class UserController {
         return obj;
     }
 
-    //Delete
+    //Delete User
     @RequestMapping(method= RequestMethod.DELETE, value="/")
     public ResponseObject<User> deleteById(@RequestParam(value="id")int id){
         ResponseObject<User> obj = new ResponseObject();
@@ -62,6 +68,7 @@ public class UserController {
         return obj;
     }
 
+    //Get Chat Preview Box Info for a User
     @RequestMapping("/{id}/chats")
     public ResponseObject<ArrayList<ChatDBResponse>>  getChatListByUserId(@PathVariable(value="id")int id){
         ResponseObject<ArrayList<ChatDBResponse>> obj = new ResponseObject();
@@ -69,6 +76,16 @@ public class UserController {
         return obj;
     }
 
+//    @PostMapping("/{id}/chats")
+//    public ResponseObject<Chat>  createNewEmptyChat(
+//            @PathVariable(value="id1")int id1,
+//            @PathVariable(value="id2")int id2){
+//        ResponseObject<ArrayList<ChatDBResponse>> obj = new ResponseObject();
+//        obj.setData(userService.createNewEmptyChat(id1, id2));
+//        return obj;
+//    }
+
+    //Send a message from one user to another
     @PostMapping("/{id}/chats/{other_id}")
     public ResponseObject<Chat>  createNewChat(
             @PathVariable(value="id")int id,
@@ -79,6 +96,7 @@ public class UserController {
         return obj;
     }
 
+    //Get Messages between two users
     @RequestMapping("/{id}/chats/{other_id}")
     public ResponseObject<ArrayList<Message>> getChatListByUserId(
             @PathVariable(value="id")int id,
@@ -97,6 +115,7 @@ public class UserController {
     timestamp: 02/03/2020 4:45:34
 }
      */
+    //Create New Chat with New User
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/{id}/chat")
     public ResponseObject<Message> addNewMessage(

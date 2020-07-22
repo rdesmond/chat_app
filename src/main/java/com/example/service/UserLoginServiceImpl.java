@@ -17,9 +17,11 @@ public class UserLoginServiceImpl implements UserLoginService {
 
 	@Autowired
 	private UserRepository userRepository;
+
 	@Autowired
     private RoleRepository roleRepository;
-    @Autowired
+
+	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override

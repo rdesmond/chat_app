@@ -73,7 +73,6 @@ function createPreviewBoxes(dataObj){
 }
 
 
-
 /*  ===============
 
     These next two functions create elements on the page

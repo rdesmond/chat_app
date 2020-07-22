@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.exceptions.CustomException;
 import com.example.mappers.ChatMapper;
 import com.example.mappers.UserMapper;
 import com.example.model.auth.User;
@@ -7,6 +8,7 @@ import com.example.model.internal.Chat;
 import com.example.model.internal.ChatPost;
 import com.example.model.internal.Message;
 import com.example.model.responses.ChatDBResponse;
+import com.example.model.responses.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,5 +84,9 @@ public class UserMessageService {
         int x = chatMapper.associateChat(id, chat.getId());
         int y = chatMapper.associateChat(other_id, chat.getId());
         return chat;
+    }
+
+    public ResponseObject<ArrayList<User>> testException() throws Exception {
+        throw new Exception(" ** Cuttlefish ** ");
     }
 }

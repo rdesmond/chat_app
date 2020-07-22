@@ -14,7 +14,8 @@ import java.util.ArrayList;
 @Mapper
 public interface ChatMapper {
 
-    String GET_MESSAGES_BY_CHAT_ID = "select m.id, m.message, m.date_sent, m.chat_id, m.user_id as sender_id, c.chat_title " +
+    String GET_MESSAGES_BY_CHAT_ID = "select m.id, m.message, m.date_sent, " +
+            "m.chat_id, m.user_id as sender_id, c.chat_title " +
             "from messages m " +
             "join chats c " +
             "on m.chat_id = c.id " +
@@ -36,7 +37,7 @@ public interface ChatMapper {
     String GET_CHAT_ID_FOR_USERS = "select uc.chat_id " +
             "from users_chats uc " +
             "where uc.user_id = #{param1} " +
-            "or user_id = #{param2} " +
+            "or uc.user_id = #{param2} " +
             "group by uc.chat_id " +
             "order by count(uc.chat_id) desc " +
             "limit 1";

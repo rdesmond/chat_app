@@ -1,5 +1,8 @@
 package com.example.model.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseObject <T>{
 
     T data;
@@ -20,5 +23,13 @@ public class ResponseObject <T>{
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
